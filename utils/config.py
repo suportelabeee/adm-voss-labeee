@@ -101,6 +101,12 @@ def verify_build_exists(cep, numero, complemento, ocupacao, ocupacao_desc, aplic
         return "OK"
     return False
 
+def generate_build_code():
+    conn = st.connection("gsheets", type=GSheetsConnection, ttl=0)
+    sql = f'SELECT MAX(id) AS id FROM build'
+    response = conn.query(sql)
+    code = int(response["id"].tolist()[0]) + 1
+    return code
 
 def mail_auth_code(mail_person:str):
     auth_code = authorization_list[randint(0, len(authorization_list)-1)]

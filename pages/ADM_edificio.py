@@ -91,7 +91,7 @@ if col2.button(label='Gerar ID do local de trabalho', use_container_width=True, 
         status = verify_build_exists(cep=cep, numero=numero, complemento=complemento, ocupacao=ocupa_trabalho, ocupacao_desc=f"{n_pavimentos}" if n_pavimentos is not None else None, aplicada_toda_ocupacao=aplicada_todos_locais)
     if status == "OK":
         with st.spinner('Registrando local de trabalho na base de dados...'):
-            codigo = randint(10000000, 99999999)
+            codigo = generate_build_code()
             datetime_now = str(datetime.now()) 
             answered = [codigo, st.session_state['email']] + check_answers + [datetime_now]
             register_building(answered)
